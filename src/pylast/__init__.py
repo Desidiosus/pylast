@@ -2359,7 +2359,7 @@ class User(_BaseObject, _Chartable):
 
         return Track(artist, title, self.network, self.name)
 
-    def get_recent_tracks(self, limit=10, cacheable=True, time_from=None, time_to=None):
+    def get_recent_tracks(self, limit=10, cacheable=True, time_from=None, time_to=None, page=None):
         """
         Returns this user's played track as a sequence of PlayedTrack objects
         in reverse order of playtime, all the way back to the first track.
@@ -2386,6 +2386,8 @@ class User(_BaseObject, _Chartable):
             params["from"] = time_from
         if time_to:
             params["to"] = time_to
+        if page:
+            params["page"] = page
 
         seq = []
         for track in _collect_nodes(
